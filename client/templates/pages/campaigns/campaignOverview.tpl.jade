@@ -1,0 +1,27 @@
+.ui.grid
+    .sixteen.wide.column
+        .ui.center.aligned.top.attached.inverted.panel.header My Campaigns
+        #campaigns.ui.middle.attached.panel.loading.segment
+            if currentUser
+                if hasCampaigns
+                    .ui.very.relaxed.divided.animated.selection.list
+                        each campaigns
+                            +campaignItem
+                else
+                    .ui.center.aligned.basic.segment
+                        h1.ui.header No campaigns found,
+                            a(href='/campaigns/add' title='Create Campaign') create one
+                            | now!
+            else
+                .ui.center.aligned.basic.segment
+                    p Please sign in to see your campaigns.
+                    +loginButtons
+        .ui.bottom.attached.panel.horizontal.clearing.segment
+            .ui.label Campaigns: #{countCampaigns}
+
+            .ui.right.floated.tiny.buttons
+                .ui.disabled.icon.button
+                    i.left.arrow.icon
+                .ui.disabled.button 1
+                .ui.disabled.icon.button
+                    i.right.arrow.icon

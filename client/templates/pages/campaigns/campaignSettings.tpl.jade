@@ -1,0 +1,13 @@
+.ui.grid
+    .sixteen.wide.column
+        .ui.center.aligned.top.attached.inverted.panel.header
+            i.settings.icon
+            | #{campaign.name} - Settings
+        #campaignSettings.ui.middle.attached.panel.loading.segment
+            +quickForm(collection="Campaign" id="updateCampaignForm" doc=campaign type="update" fields=fields buttonContent='Save Campaign')
+
+            .ui.divider
+
+            #removeCampaign.ui.huge.fluid.red.icon.button
+                i.remove.icon
+                | Remove Campaign

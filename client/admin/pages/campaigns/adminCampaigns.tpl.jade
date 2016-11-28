@@ -1,0 +1,23 @@
+h1.ui.divided.header Campaigns
+
+.ui.column.grid
+    .three.wide.column
+        +Paginator_UI(campaigns)
+    .two.wide.column
+        .ui.search.icon.input
+            input#search(type='text' placeholder='Search...')
+            i.search.icon
+table.ui.fluid.sortable.table
+    thead
+        tr
+            th(data-key='name').sorted.ascending Name
+            th(data-key='dm') Dungeon Master
+            th(data-key='players') Players
+            th(data-key='time') Time
+            th Settings
+            th(data-key='updatedAt') Updated At
+            th(data-key='createdAt') Created At
+    tbody
+        each campaigns
+            +adminCampaignItem
++Paginator_UI(campaigns)

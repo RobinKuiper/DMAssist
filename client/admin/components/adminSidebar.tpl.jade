@@ -1,0 +1,38 @@
+#adminSidebar.ui.visible.left.thin.sidebar
+    .ui.inverted.vertical.fluid.menu
+        a#logo.header.item(href='/admin') DMAssist
+            span Admin
+        if currentUser
+            #userMenu.ui.simple.dropdown.item
+                +avatar(user=currentUser shape='circle' size='extra-small')
+                //img.ui.avatar.image(src=currentUser.profile.picture)
+                | #{username}
+                i.dropdown.icon
+                .menu
+                    a.item(href='/profile')
+                        i.user.icon
+                        | Profile
+                    if isAdmin
+                        a.item(href='/admin')
+                            i.spy.icon
+                            | Admin
+                    .divider
+                    a#signOut.item
+                        i.sign.out.icon
+                        | Sign Out
+        .item &nbsp;
+        a.item(href='/admin' title='Dashboard') Dashboard
+            i.home.icon
+        a.item(href='/admin/users' title='Users') Users
+            i.user.icon
+        a.item(href='/admin/monsters' title='Show all monsters') Monsters
+            i.spy.icon
+        a.item(href='/admin/campaigns' title='Show your campaigns.') Campaigns
+            i.newspaper.icon
+
+    #bottomMenu.ui.mini.inverted.vertical.fluid.menu
+        a.item(href='/dashboard' title='Back to Site')
+            i.arrow.left.icon
+            | Site
+        //a.item(href='/donate' title='Donate to keep the project running.') Buy me a beer!
+            i.dollar.icon

@@ -1,0 +1,23 @@
+tr.monsterItem
+    td= formatCR(challenge_rating)
+    td
+        a.ui.sub.header(href='/monsters/#{slug}' title=name) #{name}
+        div.size #{size} #{type}
+    td #{hit_points}
+    td #{armor_class}
+    td
+        =CRtoXP(challenge_rating)
+        | XP
+    td
+        .addToEncounterButton.ui.mini.dropdown.icon.button(data-content='Add this monster to an encounter.' data-slug=slug)
+            i.plus.icon
+            .menu
+                if encounters
+                    each encounter in encounters
+                        .item(data-value=encounter.slug) #{encounter.name}
+                    .divider
+                .item(data-value='newEncounter21') New Encounter
+
+           if mine
+               a.ui.mini.blue.icon.button(href='/monsters/edit/#{slug}' data-content='Edit this monster')
+                   i.settings.icon

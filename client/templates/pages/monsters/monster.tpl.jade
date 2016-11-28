@@ -1,0 +1,217 @@
+.ui.container
+
+    .ui.breadcrumb
+        a(href='/monsters').section Monsters
+        i.right.chevron.icon.divider
+        .active.section #{monster.name}
+
+    #monster.ui.raised.top.attached.loading.segment
+        .ui.red.ribbon.label #{monster.size} #{monster.type}
+        span.ui.header #{monster.name}
+        //if isOwner
+            a(href='/monster/custom/#{monster.slug}/edit') Edit
+        if monster.custom
+            if mine
+                a.ui.right.floated.blue.mini.icon.button(href='/monsters/edit/#{monster.slug}' data-content='Edit monster')
+                    i.settings.icon
+            .ui.right.floated.sub.header Created By:
+                =getDisplayName(monster.userId)
+        .ui.top.attached.segment
+            .ui.two.column.grid
+                .column
+                    .ui.list
+                        .item
+                            .content
+                                strong Armor Class:
+                                span #{monster.armor_class}
+                        .item
+                            .content
+                                strong Hit Points:
+                                span #{monster.hit_points} (#{monster.hit_dice})
+                        .item
+                            .content
+                                strong Speed:
+                                span #{monster.speed}
+                .column
+                    .ui.list
+                        .item
+                            .content
+                                strong Alignment:
+                                span #{monster.alignment}
+                        .item
+                            .content
+                                strong Languages:
+                                span #{monster.languages}
+                        .item
+                            .content
+                                strong Challenge:
+                                span
+                                    =formatCR(monster.challenge_rating)
+                                    | (
+                                    =CRtoXP(monster.challenge_rating)
+                                    | XP )
+            .ui.divider
+            table.ui.fixed.black.table
+                thead
+                    tr
+                        th STR
+                        th DEX
+                        th CON
+                        th INT
+                        th WIS
+                        th CHA
+                tbody
+                    tr
+                        td
+                            | #{monster.strength} (
+                            =calcModifier(monster.strength)
+                            | )
+                        td
+                            | #{monster.dexterity} (
+                            =calcModifier(monster.dexterity)
+                            | )
+                        td
+                            | #{monster.constitution} (
+                            =calcModifier(monster.constitution)
+                            | )
+                        td
+                            | #{monster.intelligence} (
+                            =calcModifier(monster.intelligence)
+                            | )
+                        td
+                            | #{monster.wisdom} (
+                            =calcModifier(monster.wisdom)
+                            | )
+                        td
+                            | #{monster.charisma} (
+                            =calcModifier(monster.charisma)
+                            | )
+            .ui.divider
+            .ui.two.column.grid
+                .column
+                    .ui.list
+                        .item
+                            strong Skills:
+                            .ui.horizontal.divided.list
+                                if monster.acrobatics
+                                    .item Acrobatics +#{monster.acrobatics}
+                                if monster.animal_handling
+                                    .item Animal Handling +#{monster.animal_handling}
+                                if monster.arcana
+                                    .item Arcana +#{monster.arcana}
+                                if monster.athletics
+                                    .item Athletics +#{monster.athletics}
+                                if monster.deception
+                                    .item Deception +#{monster.deception}
+                                if monster.history
+                                    .item History +#{monster.history}
+                                if monster.insight
+                                    .item Insight +#{monster.insight}
+                                if monster.intimidation
+                                    .item Intimidation +#{monster.intimidation}
+                                if monster.investigation
+                                    .item Investigation +#{monster.investigation}
+                                if monster.medicine
+                                    .item Medicine +#{monster.medicine}
+                                if monster.nature
+                                    .item Nature +#{monster.nature}
+                                if monster.perception
+                                    .item Perception +#{monster.perception}
+                                if monster.performance
+                                    .item Performance +#{monster.performance}
+                                if monster.persuasion
+                                    .item Persuasion +#{monster.persuasion}
+                                if monster.religion
+                                    .item Religion +#{monster.religion}
+                                if monster.sleight_of_hand
+                                    .item Sleight of Hand +#{monster.sleight_of_hand}
+                                if monster.stealth
+                                    .item Stealth +#{monster.stealth}
+                                if monster.survival
+                                    .item Survival +#{monster.survival}
+                        .item
+                            strong Senses:
+                            span #{monster.senses}
+                        .item
+                            strong Saves:
+                            .ui.horizontal.divided.list
+                                if monster.strength_save
+                                    .item Str +#{monster.strength_save}
+                                if monster.dexterity_save
+                                    .item Dex +#{monster.dexterity_save}
+                                if monster.constition_save
+                                    .item Con +#{monster.constition_save}
+                                if monster.intelligence_save
+                                    .item Int +#{monster.intelligence_save}
+                                if monster.wisdom_save
+                                    .item Wis +#{monster.wisdom_save}
+                                if monster.charisma_save
+                                    .item Cha +#{monster.charisma_save}
+
+                .column
+                    .ui.list
+                        if monster.damage_immunities
+                            .item
+                                strong Damage Immunities:
+                                span #{monster.damage_immunities}
+                        if monster.condition_immunities
+                            .item
+                                strong Condition Immunities:
+                                span #{monster.condition_immunities}
+                        if monster.damage_vulnerabilities
+                            .item
+                                strong Vulnerabilities
+                                span #{monster.damage_vulnerabilities}
+                        if monster.damage_resistances
+                            .item
+                                strong Damage Resistances:
+                                span #{monster.damage_resistances}
+
+            if monster.special_abilities
+                .ui.header Traits
+                .ui.list
+                    each trait in monster.special_abilities
+                        .item
+                            strong #{trait.name}
+                            span #{trait.desc}
+
+            if monster.actions
+                .ui.header Actions
+                .ui.list
+                    each action in monster.actions
+                        .item
+                            strong #{action.name}
+                            span #{action.desc}
+
+            if monster.reactions
+                .ui.header Reactions
+                .ui.list
+                    each reaction in monster.reactions
+                        .item
+                            strong #{reaction.name}
+                            span #{reaction.desc}
+
+            if monster.legendary_actions
+                .ui.header
+                    .content Legendary Actions
+                        .sub.header The #{monster.name} can take 3 legendary actions, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature�s turn. The #{monster.name} regains spent legendary actions at the start of its turn.
+                .ui.list
+                    each action in monster.legendary_actions
+                        .item
+                            strong #{action.name}
+                            span #{action.desc}
+            .ui.divider
+            .ui.bottom.attached.label
+                if custom
+                    if isOwner
+                        .ui.right.floated.text.menu
+                            a#notificationToggle.item(data-content='Turn on/off email notifications') Notifications:
+                                if monster.comments.notification
+                                        | ON
+                                else
+                                    | OFF
+                            //a.item(href='/monster/custom/#{monster.slug}/edit') Edit
+
+    if monster.custom
+        .ui.segment
+            +commentsBox(id=monster._id)

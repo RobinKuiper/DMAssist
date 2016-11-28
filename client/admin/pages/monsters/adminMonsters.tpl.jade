@@ -1,0 +1,17 @@
+h1.ui.divided.header Monsters
+
+.ui.two.column.grid
+    .four.wide.column
+        #customCheckbox.ui.toggle.checkbox
+            label Show custom monsters
+            input(type='checkbox' name='custom')
+        .ui.vertical.menu
+            each monsters
+                a.monster.item(data-id=_id) #{name}
+                    if book.name
+                        i.checkmark.icon
+    .twelve.wide.column
+        if monster
+            +quickForm(collection="Monster" id="addMonsterForm" type="update" doc=monster fields=fields)
+        else
+            +quickForm(collection="Monster" id="addMonsterForm" type="insert" fields=fields)

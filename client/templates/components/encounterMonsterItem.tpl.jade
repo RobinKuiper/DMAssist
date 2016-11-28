@@ -1,0 +1,13 @@
+tr
+    td=formatCR(monster.challenge_rating)
+    td
+        .ui.sub.header #{monster.name}
+        span #{monster.size} #{monster.type}
+    td #{monster.hit_points}
+    td #{monster.armor_class}
+    td
+        =CRtoXP(monster.challenge_rating)
+        | XP
+    td
+        #removeMonsterFromEncounter.ui.mini.red.icon.button
+            i.remove.icon(data-content='Remove from encounter.')

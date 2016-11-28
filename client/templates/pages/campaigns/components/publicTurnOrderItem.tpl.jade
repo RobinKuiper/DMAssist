@@ -1,0 +1,51 @@
+tr(id=turnorder.name)
+    td
+        if turnorder.name
+            unless turnorder.done
+                | #{turnorder.name}
+                if turnorder.number
+                    | ##{turnorder.number}
+            else
+                i.done #{turnorder.name}
+                    if turnorder.number
+                        | ##{turnorder.number}
+    td
+        if turnorder.initiative
+            =turnorder.initiative
+    td
+        if turnorder.level
+            unless player
+                =formatCR(turnorder.level)
+            else
+                =turnorder.level
+    if showHP
+        td
+            if turnorder.hp
+                =turnorder.hp
+    if showAC
+        td
+            if turnorder.ac
+                =turnorder.ac
+    td
+        .ui.mini.list
+            each buff in turnorder.buffs
+                .item
+                    if buff.duration
+                        a.ui.mini.remove.buff.label(data-buff=buff.buffName, data-content='Click to remove') #{buff.buffName} -
+                            =formatTime(buff.duration)
+                    else
+                        a.ui.mini.red.remove.buff.label.strikethrough(data-buff=buff.buffName, data-content='Click to remove') #{buff.buffName}
+    td
+        .ui.mini.list
+            each effect in turnorder.effects
+                .item
+                    a.ui.mini.remove.effect.label(data-effect=effect, data-content='Click to remove') #{effect}
+    td
+        if turnorder.concentration
+            .ui.mini.list
+                .item
+                    if turnorder.concentration.duration
+                        a.ui.mini.remove.concentration.label(data-buff=turnorder.concentration.concentrationName, data-content='Click to remove') #{turnorder.concentration.concentrationName} -
+                            =formatTime(turnorder.concentration.duration)
+                    else
+                        a.ui.mini.red.remove.concentration.label.strikethrough(data-buff=turnorder.concentration.concentrationName, data-content='Click to remove') #{turnorder.concentration.concentrationName}

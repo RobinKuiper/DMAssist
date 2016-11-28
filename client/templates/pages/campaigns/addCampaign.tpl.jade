@@ -1,0 +1,47 @@
+.ui.grid
+    .sixteen.wide.column
+        .ui.center.aligned.top.attached.inverted.panel.header Create Campaign
+        .ui.middle.attached.panel.clearing.segment
+            if currentUser
+                +quickForm(collection="Campaign" id="addCampaignForm" type="insert" fields=fields buttonContent='Add Campaign')
+
+                //form.ui.form
+                    .field
+                        label Campaign Name
+                        input(type='text' name='name' placeholder='Campaign Name')
+                    .ui.dividing.header Players
+                    .four.fields.ui.basic.segment
+                        .removePlayer.ui.mini.red.corner.label
+                            i.minus.icon
+                        .field
+                            label Name
+                            input(type='text' name='name' placeholder='Name')
+                        .field
+                            label Level
+                            input(type='number' name='level' placeholder='Level')
+                        .field
+                            label Hit Points
+                            input(type='number' name='hp' placeholder='Hit Points')
+                        .field
+                            label Armor Class
+                            input(type='number' name='ac' placeholder='Armor Class')
+                    .field
+                        #addPlayer.ui.icon.button
+                            i.plus.icon
+                            | Add Player
+                    .ui.dividing.header Settings
+                    .three.fields
+                        .field
+                            label Short Rest
+                            input(type='text' name='shortRestTime' placeholder='1H')
+                        .field
+                            label Long Rest
+                            input(type='text' name='longRestTime' placeholder='8H')
+                        .field
+                            label Round Duration (seconds)
+                            input(type='number' name='roundDuration' placeholder='6')
+                    button.ui.right.floated.green.button Save Campaign
+
+            else
+                p You need to create an account or log in first.
+                +loginButtons

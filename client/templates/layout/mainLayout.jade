@@ -1,0 +1,16 @@
+head
+  title DMAssist
+  link(rel='icon' href='/favicon.ico?v=2')
+  script(src="//cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js")
+
+body(id='body')
+
+template(name='mainLayout')
+  +sidebar
+  +encounterSidebar
+
+  if currentUser
+    +firstTime
+
+  #mainPusher.pusher
+    +Template.dynamic(template=content)

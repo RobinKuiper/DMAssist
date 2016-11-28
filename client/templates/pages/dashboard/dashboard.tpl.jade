@@ -1,0 +1,87 @@
+#dashboard.ui.grid
+    .five.wide.column
+        .ui.accordion
+            .ui.center.aligned.top.attached.inverted.panel.active.title.header Latest Monsters
+            #monsters.ui.middle.attached.panel.loading.active.content.segment
+                #monsterList.ui.relaxed.middle.aligned.divided.animated.selection.list
+                    each monsters
+                        +dashboardMonsterItem
+            if moreThenFiveMonsters
+                .ui.right.aligned.bottom.attached.panel.segment
+                    a.ui.tiny.button(href='/monsters' title='Show all monsters.') More...
+
+    .five.wide.column
+        .ui.accordion
+            .ui.center.aligned.top.attached.inverted.panel.active.title.header My Campaigns
+            #campaigns.ui.middle.attached.panel.loading.active.content.segment
+                if currentUser
+                    if campaigns
+                        #campaignList.ui.relaxed.middle.aligned.divided.animated.selection.list
+                            each campaigns
+                                +dashboardCampaignItem
+                    else
+                        h3.ui.header No campaigns found,
+                            a(href='/campaigns/add' title='Create Campaign') create one
+                            | now!
+                else
+                    p Please
+                        .ui.inline.login.dropdown
+                            .text sign in
+                            i.dropdown.icon
+                            .menu
+                                .item
+                                    +loginButtons
+                        | to see your campaigns.
+            if moreThenFiveCampaigns
+                .ui.right.aligned.bottom.attached.panel.segment
+                    a.ui.tiny.button(href='/campaigns' title='Show all campaigns.') More...
+
+    .five.wide.column
+        .ui.accordion
+            .ui.center.aligned.top.attached.inverted.panel.active.title.header My Monsters
+            #customMonsters.ui.middle.attached.panel.loading.active.content.segment
+                if currentUser
+                    if customMonsters
+                        .ui.relaxed.middle.aligned.divided.animated.selection.list
+                            each customMonsters
+                                +dashboardCustomMonsterItem
+                    else
+                        h3.ui.header No custom monsters found,
+                            a(href='/campaigns/add' title='Create Monster') create one
+                            | now!
+                else
+                    p Please
+                        .ui.inline.login.dropdown
+                            .text sign in
+                            i.dropdown.icon
+                            .menu
+                                .item
+                                    +loginButtons
+                        | to see your monsters.
+            if moreThenFiveCustomMonsters
+                .ui.right.aligned.bottom.attached.panel.segment
+                    a.ui.tiny.button(href='/monsters/mine' title='Show all of my monsters.') More...
+
+    .five.wide.column
+        .ui.accordion
+            .ui.center.aligned.top.attached.inverted.panel.active.title.header Statistics
+            #statistics.ui.middle.attached.panel.loading.active.content.segment
+                .ui.statistics
+                    a.statistic(href='/campaigns' title='Show all of your campaigns.')
+                        .value #{countCampaigns}
+                        .label My Campaigns
+                    a.statistic(href='/monsters/mine' title='Show all of your monsters.')
+                        .value #{countCustomMonsters}
+                        .label My Monsters
+                    a.statistic(href='/monsters' title='Show all monsters')
+                        .value #{countMonsters}
+                        .label Monsters
+
+    .eleven.wide.column
+        .ui.accordion
+            .ui.center.aligned.top.attached.inverted.panel.active.title.header Treasure Generator
+            .ui.middle.attached.panel.active.content.segment
+                +DAtreasure
+
+    .sixteen.wide.column
+        #dashboardAdd

@@ -1,0 +1,38 @@
+.ui.container
+    .ui.grid
+        .sixteen.wide.column
+            .ui.center.aligned.top.attached.inverted.panel.header #{campaign.name} - Public
+            .ui.middle.attached.panel.loading.campaign.segment
+                .ui.grid
+                    .two.wide.column
+                        div Round: #{round}
+                        div Time: #{time}
+
+                table.ui.black.compact.table
+                    thead
+                        tr
+                            th Name
+                            th Initiative
+                            th Level
+                            if campaign.public.settings.showHP
+                                th HP
+                            if campaign.public.settings.showAC
+                                th AC
+                            th Buffs
+                            th Conditions
+                            th Concentration
+                    tbody
+                        each turnorder in campaign.turnOrder
+                            +publicTurnOrderItem(turnorder=turnorder showHP=campaign.public.settings.showHP showAC=campaign.public.settings.showAC)
+                    tfoot
+                        tr
+                            th(colspan='8')
+                                .ui.horizontal.list
+                                    .item Round: #{round}
+                                    .item Time: #{time}
+
+            .ui.panel.loading.campaign.segment
+                .ui.grid
+                    .sixteen.wide.column
+                        .ui.left.floated.massive.blue.buttons
+                            .ui.button(data-content='Keep track of time elapsed.')=formatTime(campaign.time)

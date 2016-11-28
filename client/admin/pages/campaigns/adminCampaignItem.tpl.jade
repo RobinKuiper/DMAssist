@@ -1,0 +1,15 @@
+tr
+    td #{name}
+    td=getDisplayName(dm)
+    td
+        .ui.horizontal.divided.list
+            each player in players
+                .item #{player.name}
+    td=formatTime(time)
+    td
+        .ui.horizontal.list
+            .item SR: #{settings.shortRest}
+            .item LR: #{settings.longRest}
+            .item Round: #{settings.round}
+    td=formatDate(updatedAt)
+    td=formatDate(createdAt)

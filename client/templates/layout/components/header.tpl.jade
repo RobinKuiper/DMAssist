@@ -1,0 +1,47 @@
+#topbar.ui.tiny.inverted.top.menu
+    a#toggleSidebar.item
+        i.sidebar.icon
+
+    a#logo.header.item(href='/') DM
+        span Assist
+        .sub Make life of evil easier.
+    .right.menu
+        a.item
+            i.dollar.icon
+            | Buy me a beer!
+        a.icon.item
+            i.info.icon
+        if currentUser
+            #userMenu.ui.simple.dropdown.item
+                +avatar(user=currentUser shape='circle' size='small')
+                //img.ui.avatar.image(src=currentUser.profile.picture)
+                | &nbsp;#{currentUser.profile.name}
+                i.dropdown.icon
+                .menu
+                    a.item(href='/profile')
+                        i.user.icon
+                        | Profile
+                    if isAdmin
+                        a.item(href='/admin')
+                            i.spy.icon
+                            | Admin
+                    .divider
+                    a#signOut.item
+                        i.sign.out.icon
+                        | Sign Out
+        else
+            .item
+                button.ui.purple.dropdown.button Sign In
+                    .menu
+                        .item
+                            h2.ui.header
+                                .content Sign In
+                                    .sub.header or Sign Up
+                            .ui.buttons
+                                #facebookButton.ui.facebook.button
+                                    i.facebook.icon
+                                    | Facebook
+                                .or
+                                #googleButton.ui.google.plus.button
+                                    i.google.icon
+                                    | Google

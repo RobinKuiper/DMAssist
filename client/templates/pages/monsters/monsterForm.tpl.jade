@@ -1,0 +1,127 @@
+.ui.grid
+    .sixteen.wide.column
+        .ui.center.aligned.top.attached.inverted.panel.header Create Custom Monster
+        .ui.middle.attached.panel.segment
+            if currentUser
+                +autoForm(collection="Monster" doc=doc id="monsterForm" type=formType)
+                    +afFieldInput(name='custom' type='hidden' value=true options='allowed')
+                    +afFieldInput(name='userId' type='hidden' value=currentUser._id options='allowed')
+                    .fields
+                        .field
+                            +afQuickField(name='name' placeholder='Epic Monster')
+                        .field
+                            +afQuickField(name='size' type='select' options='allowed' placeholder='Select Size')
+                        .field
+                            +afQuickField(name='type' type='select' options='allowed' placeholder='Select Type')
+                        .field
+                            +afQuickField(name='subtype' placeholder='Sub Type')
+                        .field
+                            +afQuickField(name='speed' placeholder='30ft., fly 20ft.')
+                        .field
+                            +afQuickField(name='alignment' type='select' options='allowed' placeholder='Select Alignment')
+                    .fields
+                        .field
+                            +afQuickField(name='challenge_rating' type='select' options='allowed' placeholder='Select CR')
+                        .field
+                            +afQuickField(name='hit_points' placeholder='12')
+                        .field
+                            +afQuickField(name='hit_dice' placeholder='1D6')
+                        .field
+                            +afQuickField(name='armor_class' placeholder='11')
+                    .ui.dividing.header Abilities
+                    .fields
+                        .field
+                            +afQuickField(name='strength' placeholder='15')
+                        .field
+                            +afQuickField(name='dexterity' placeholder='11')
+                        .field
+                            +afQuickField(name='constitution' placeholder='9')
+                        .field
+                            +afQuickField(name='intelligence' placeholder='8')
+                        .field
+                            +afQuickField(name='wisdom' placeholder='16')
+                        .field
+                            +afQuickField(name='charisma' placeholder='12')
+                    .ui.dividing.header Saving Throws
+                    .fields
+                        .field
+                            +afQuickField(name='strength_save')
+                        .field
+                            +afQuickField(name='dexterity_save')
+                        .field
+                            +afQuickField(name='constitution_save')
+                        .field
+                            +afQuickField(name='intelligence_save')
+                        .field
+                            +afQuickField(name='wisdom_save')
+                        .field
+                            +afQuickField(name='charisma_save')
+                    .ui.dividing.header Skills
+                    .fields
+                        .field
+                            +afQuickField(name='acrobatics')
+                        .field
+                            +afQuickField(name='animal_handling')
+                        .field
+                            +afQuickField(name='arcana')
+                        .field
+                            +afQuickField(name='athletics')
+                        .field
+                            +afQuickField(name='deception')
+                        .field
+                            +afQuickField(name='history')
+                        .field
+                            +afQuickField(name='insight')
+                        .field
+                            +afQuickField(name='intimidation')
+                        .field
+                            +afQuickField(name='investigation')
+                    .fields
+                        .field
+                            +afQuickField(name='medicine')
+                        .field
+                            +afQuickField(name='nature')
+                        .field
+                            +afQuickField(name='perception')
+                        .field
+                            +afQuickField(name='performance')
+                        .field
+                            +afQuickField(name='persuasion')
+                        .field
+                            +afQuickField(name='religion')
+                        .field
+                            +afQuickField(name='sleight_of_hand')
+                        .field
+                            +afQuickField(name='stealth')
+                        .field
+                            +afQuickField(name='survival')
+                    .ui.dividing.header Others
+                    .fields
+                        .field
+                            +afQuickField(name='damage_resistances')
+                        .field
+                            +afQuickField(name='damage_immunities')
+                        .field
+                            +afQuickField(name='damage_vulnerabilities')
+                        .field
+                            +afQuickField(name='condition_immunities')
+                        .field
+                            +afQuickField(name='senses')
+                    .field
+                        +afQuickField(name='special_abilities')
+                    .field
+                        +afQuickField(name='actions')
+                    .field
+                        +afQuickField(name='reactions')
+                    .field
+                        +afQuickField(name='legendary_actions')
+                    .field
+                        +afQuickField(name='public')
+                        button.ui.button(type='submit') Save Monster
+            else
+                p You need to create an account or login first.
+                +loginButtons
+
+
+
+            //+quickForm(collection="Monster" id="addCustomMonsterForm" type="insert" omitFields=omittedFields)

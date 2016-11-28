@@ -1,0 +1,28 @@
+tr
+    td
+        if status.online
+            i.green.circle.icon
+        else
+            i.red.circle.icon
+    td
+        img.ui.avatar.image(src=profile.picture)
+        | #{profile.name}
+    td #{profile.firstName}
+    td #{profile.lastName}
+    td #{profile.email}
+    td
+        unless status.online
+            if status.lastLogin.date
+                =formatDate(status.lastLogin.date)
+            else
+                | -
+        else
+            | Now
+    td=formatDate(createdAt)
+    td
+        if isAdmin
+            i.checkmark.icon
+    td
+        unless isAdmin
+            button.ui.icon.button.makeAdmin(data-content='Add user to admin group')
+                i.chevron.up.icon

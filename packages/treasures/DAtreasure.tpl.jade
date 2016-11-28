@@ -1,0 +1,90 @@
+.ui.three.column.grid
+    .four.wide.column
+        +autoForm(schema=schema id='treasureForm')
+            .field
+                #toggleHoard.ui.slider.checkbox
+                    label Hoard
+                    input(type='checkbox' name='hoard')
+            .fields
+                unless hoard
+                    .field
+                        +afQuickField(name='amount' type='select' options='allowed' placeholder='Amount')
+
+                .field
+                    +afQuickField(name='cr' type='select' class='ui dropdown fluid selection' placeholder='Rating')
+            unless hoard
+                .field(data-content='Percentage of currency to trade for gems/art.')
+                    +afQuickField(name='percentage' type='select' placeholder='Percentage')
+
+            .field
+                .ui.right.labeled.icon.buttons
+                    if treasure
+                        button.ui.blue.button(type='submit')
+                            i.undo.icon
+                            | Generate
+                        if currentUser
+                            if hasCampaigns
+                                #saveButton.ui.green.dropdown.button
+                                    i.save.icon
+                                    | Save
+                                    .menu
+                                        each campaign in campaigns
+                                            .item(data-value=campaign.slug) #{campaign.name}
+                            else
+                                #saveButton.ui.green.dropdown.disabled.button
+                                    i.save.icon
+                                    | Save
+                        else
+                            #saveButton.ui.green.dropdown.disabled.button
+                                i.save.icon
+                                | Save
+                    else
+                        button.ui.blue.button(type='submit') Generate
+                            i.diamond.icon
+
+    .one.wide.column
+
+    .eleven.wide.column
+        if treasure
+            .ui.divided.header Currency
+            .ui.statistics
+                if treasure.pp
+                    .statistic
+                        .value #{treasure.pp}
+                        .label Platinum
+                if treasure.gp
+                    .statistic
+                        .value #{treasure.gp}
+                        .label Gold
+                if treasure.ep
+                    .statistic
+                        .value #{treasure.ep}
+                        .label Electrum
+                if treasure.sp
+                    .statistic
+                        .value #{treasure.sp}
+                        .label Silver
+                if treasure.cp
+                    .statistic
+                        .value #{treasure.cp}
+                        .label Copper
+
+            .ui.two.column.grid
+                if treasure.extra.gems
+                    .five.wide.column
+                        .ui.divided.header Gems
+                        .ui.list
+                            each treasure.extra.gems
+                                .item #{this}
+                if treasure.extra.art
+                    .five.wide.column
+                        .ui.divided.header Arts
+                        .ui.list
+                        each treasure.extra.art
+                            .item #{this}
+                if treasure.extra.magicItems
+                    .five.wide.column
+                        .ui.divided.header Magical Items
+                        .ui.list
+                        each treasure.extra.magicItems
+                            .item #{this}

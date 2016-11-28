@@ -1,0 +1,13 @@
+<template name="afObjectField_semanticUI">
+  {{#with afFieldLabelText name=this.name}}
+    <div class="ui dividing header">{{this}}</div>
+  {{/with}}
+  <div class="ui fields basic segment form{{#if afFieldIsInvalid name=this.name}} error{{/if}}">
+    {{#if afFieldIsInvalid name=this.name}}
+      <div class="ui pointing red basic label">
+        {{{afFieldMessage name=this.name}}}
+      </div>
+    {{/if}}
+    {{> afQuickFields quickFieldsAtts}}
+  </div>
+</template>

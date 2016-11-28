@@ -1,0 +1,17 @@
+.ui.divided.header Statistics
+.ui.statistics
+    a(href='/admin/users').statistic
+        .value #{userCount}
+        .label Users
+    a(href='/admin/campaigns').statistic
+        .value #{campaignCount}
+        .label Campaigns
+    .statistic
+        .value #{encounterCount}
+        .label Encounters
+    a(href='/admin/monsters').statistic
+        .value #{monsterCount}
+        .label Monsters
+    a(href='/admin/monsters').statistic
+        .value #{customMonsterCount}
+        .label Custom Monsters

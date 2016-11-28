@@ -1,0 +1,65 @@
+.ui.grid
+    .ten.wide.column
+        #monsterDropdown.ui.fluid.search.selection.dropdown
+            input(type='hidden' name='monster')
+            i.dropdown.icon
+            .default.text Add Monster
+            .menu
+                each monster in monsters
+                    .item(data-value=monster.slug)
+                        .right.floated.content
+                            .ui.mini.label=formatCR(monster.cr)
+                        .content
+                            .header #{monster.name}
+                                .description #{monster.size} #{monster.type}
+
+    .two.wide.column
+        div Round: #{round}
+        div Time: #{time}
+
+    .four.wide.column
+        a.ui.right.floated.blue.icon.button(href='/campaigns/#{campaign.slug}/settings' title='Campaign Settings' data-content='Campaign Settings')
+            i.settings.icon
+        #addEncounter.ui.right.floated.blue.dropdown.icon.button(data-content='Add previously created encounter to the turn order.') Add Encounter
+            i.dropdown.icon
+            .menu
+                if encounters
+                    each encounter in encounters
+                        .item(data-value=encounter.slug)
+                            //.right.floated.content
+                                .ui.mini.label (#{encounter.count} monsters)
+                            .content #{encounter.name}
+                else
+                    .item(data-value='createEncounter21') Create Encounter
+
+
+table.ui.black.compact.table
+    thead
+        tr
+            th Name
+            th Initiative
+                .ui.mini.blue.inverted.icon.roll.initiative.button(data-content='Roll initiative for all monsters.')
+                    i.undo.icon
+            th Level
+            th HP
+            th AC
+            th Buffs
+            th Conditions
+            th Concentration
+            th
+    tbody
+        each campaign.turnOrder
+            +turnOrderItem
+    tfoot
+        tr
+            th(colspan='5')
+                .ui.horizontal.list
+                    .item Round: #{round}
+                    .item Time: #{time}
+            th(colspan='4')
+                .ui.mini.right.floated.icon.buttons
+                    button#addRowToTurnOrderButton.ui.green.button(data-content='Add row to turn order.')
+                        i.plus.icon
+                    button#resetTurnOrderButton.ui.red.button(data-html="<div class='ui list'><div class='item'>- Resets list</div><div class='item'>- Resets round and time</div><div class='item'>- Saves time to global time</div></div>")
+                        i.undo.icon
+                        | Reset

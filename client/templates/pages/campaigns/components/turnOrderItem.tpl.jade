@@ -1,0 +1,82 @@
+tr(id=name)
+    td
+        if name
+            unless done
+                | #{name}
+                if number
+                    | ##{number}
+            else
+                i.done #{name}
+                    if number
+                        | ##{number}
+        else
+            .ui.transparent.input
+                input(class='name' type='text' name='name' placeholder='Name')
+    td
+        if initiative
+            =initiative
+        else
+            .ui.transparent.input(data-content='Insert initiative and press enter.')
+                input(class='initiative' type='number' name='iniative' placeholder='Initiative')
+            unless player
+                .ui.mini.blue.inverted.icon.rollInitiative.button(data-content='Roll initiative for this creature.')
+                    i.undo.icon
+    td
+        unless player
+            =formatCR(level)
+        else
+            =level
+    td
+        if hp
+            .ui.mini.buttons
+                .ui.red.icon.decrease.hp.button
+                    i.minus.icon
+
+                .ui.update.hp.button #{hp}
+
+                .ui.green.icon.increase.hp.button
+                    i.plus.icon
+        else
+            .ui.transparent.input
+                input(class='hp' type='number' name='hp' placeholder='Health')
+    td #{ac}
+    td
+        .ui.mini.list
+            each buff in buffs
+                .item
+                    if buff.duration
+                        a.ui.mini.remove.buff.label(data-buff=buff.buffName, data-content='Click to remove') #{buff.buffName} -
+                            =formatTime(buff.duration)
+                                i.delete.icon
+                    else
+                        a.ui.mini.red.remove.buff.label.strikethrough(data-buff=buff.buffName, data-content='Click to remove') #{buff.buffName}
+                            i.delete.icon
+    td
+        .ui.mini.list
+            each effect in effects
+                .item
+                    a.ui.mini.remove.effect.label(data-effect=effect, data-content='Click to remove') #{effect}
+                        i.delete.icon
+    td
+        if concentration
+            .ui.mini.list
+                .item
+                    if concentration.duration
+                        a.ui.mini.remove.concentration.label(data-buff=concentration.concentrationName, data-content='Click to remove') #{concentration.concentrationName} -
+                            =formatTime(concentration.duration)
+                                i.delete.icon
+                    else
+                        a.ui.mini.red.remove.concentration.label.strikethrough(data-buff=concentration.concentrationName, data-content='Click to remove') #{concentration.concentrationName}
+                            i.delete.icon
+    td
+        .ui.mini.icon.buttons
+            .addEffect.ui.dropdown.button(data-content="Add an effect to the player.")
+                i.plus.icon
+                .menu
+                    .add.buff.item Buff
+                    .add.effect.item Condition
+                    .add.concentration.item Concentration
+            .ui.blue.done.button(data-content="Turn over.")
+                i.checkmark.icon
+            .ui.red.remove.row.button(data-content="Remove from turnorder.")
+                i.remove.icon

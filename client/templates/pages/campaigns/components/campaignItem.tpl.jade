@@ -1,0 +1,10 @@
+.item(data-slug=slug)
+    .right.floated.content
+        a.ui.blue.icon.button(href='/campaigns/#{slug}/settings' title='Campaign Settings')
+            i.settings.icon
+    .content
+        .header #{name}
+        .description Players:
+            .ui.tiny.divided.horizontal.list
+                each player in players
+                    .item #{player.name}

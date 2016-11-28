@@ -1,0 +1,15 @@
+<template name="Paginator_UI">
+  {{#if showUI}}
+    <div class="paginator-ui">
+        <div class="ui icon buttons">
+            <button class="ui {{isCurrentPageFirst}} button paginator-btn paginator-prev">
+              <i class="arrow left icon"></i>
+            </button>
+            <button class="ui {{isCurrentPageLast}} button paginator-btn paginator-next">
+              <i class="arrow right icon"></i>
+            </button>
+        </div>
+        <span>{{_ "page_x_of_y" currentPage=currentPagei18n totalPages=totalPages}}</span>
+    </div>
+  {{/if}}
+</template>

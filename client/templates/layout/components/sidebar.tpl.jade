@@ -1,0 +1,78 @@
+#mainSidebar.ui.visible.left.thin.sidebar
+    .ui.inverted.vertical.fluid.menu
+        a#logo.header.item(href='/') DM
+            span Assist
+            .sub Making life of evil easier.
+        if currentUser
+            #userMenu.ui.simple.dropdown.item
+                +avatar(user=currentUser shape='circle' size='extra-small')
+                //img.ui.avatar.image(src=currentUser.profile.picture)
+                | #{username}
+                i.dropdown.icon
+                .menu
+                    a.item(href='/profile')
+                        i.user.icon
+                        | Profile
+                    if isAdmin
+                        a.item(href='/admin')
+                            i.spy.icon
+                            | Admin
+                    .divider
+                    a#signOut.item
+                        i.sign.out.icon
+                        | Sign Out
+        else
+            .item
+                button#loginButton.ui.fluid.purple.dropdown.icon.button
+                    i.user.icon
+                    | Sign In/Up
+                    .menu
+                        .item
+                            h2.ui.header
+                                .content Sign In
+                                    .sub.header or Sign Up
+                            .ui.buttons
+                                #facebookButton.ui.facebook.button
+                                    i.facebook.icon
+                                    | Facebook
+                                .or
+                                #googleButton.ui.google.plus.button
+                                    i.google.icon
+                                    | Google
+        .item &nbsp;
+        a.item(href='/dashboard' title='Dashboard') Dashboard
+            i.home.icon
+        .accordion.item Monsters
+            i.spy.icon
+        .menu
+            a.item(href='/monsters' title='Show all monsters') Show all
+            if currentUser
+                a.item(href='/monsters/mine' title='Show My Monsters') My Monsters
+                a.item(href='/monsters/add' title='Create Custom Monster') Create Monster
+            else
+                a.disabled.item(href='/monsters/mine' title='Show My Monsters' data-content='Sign in first.') My Monsters
+                a.disabled.item(href='/monsters/add' title='Create Custom Monster' data-content='Sign in first.') Create Monster
+        .accordion.item Campaigns
+            i.newspaper.icon
+        .menu
+            a.item(href='/campaigns' title='Show your campaigns.') My Campaigns
+            if currentUser
+                a.item(href='/campaigns/add' title='Create a new campaign.') Add Campaign
+            else
+                a.disabled.item(href='/campaigns/add' title='Create a new campaign.' data-content='Sign in first.') Add Campaign
+        a.item(href='/treasure' title='Treasure Generator') Treasure Gen.
+            i.diamond.icon
+
+    #bottomMenu.ui.mini.inverted.vertical.fluid.menu
+        a.item(href='https://discord.gg/VDqHRdz' target='_blank' title='Join Our Discord!') Discord
+            i.text.telephone.icon
+        a.item(href='/about' title='About & Info') About
+            i.info.icon
+        //a.item(href='/donate' title='Donate to keep the project running.') Buy me a beer!
+            i.dollar.icon
+        .item
+            form(action='https://www.paypal.com/cgi-bin/webscr' method='post' target='_blank')
+                input(type='hidden' name='cmd' value='_s-xclick')
+                input(type='hidden' name='hosted_button_id' value='KHTW2FPB83NJJ')
+                input(type='image' src='https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif' border='0' name='submit' alt='PayPal - The safer, easier way to pay online!')
+                img(alt='' border='0' src='https://www.paypalobjects.com/nl_NL/i/scr/pixel.gif' width='1' height='1')

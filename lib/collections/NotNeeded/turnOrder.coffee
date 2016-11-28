@@ -1,0 +1,1 @@
+@turnOrder = new Mongo.Collection 'turnorder'

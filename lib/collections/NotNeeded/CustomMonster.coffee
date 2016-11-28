@@ -1,0 +1,1 @@
+@CustomMonster = new Mongo.Collection 'custommonster'

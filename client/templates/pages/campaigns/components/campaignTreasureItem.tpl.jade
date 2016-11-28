@@ -1,0 +1,31 @@
+tr
+    td #{treasure.name}
+    td #{treasure.cp}
+    td #{treasure.sp}
+    td #{treasure.ep}
+    td #{treasure.gp}
+    td #{treasure.pp}
+    td
+        if treasure.extra.gems
+            a.gems Show Gems
+                i.dropdown.icon
+            .ui.special.popup
+                .ui.list
+                    each gem in treasure.extra.gems
+                        .item #{gem}
+    td
+        if treasure.extra.art
+            a.art Show Art
+                i.dropdown.icon
+            .ui.special.popup
+                .ui.list
+                    each art in treasure.extra.art
+                        .item #{art}
+    td
+        if treasure.extra.magicItems
+            a.magicItems Show Magic Items
+                i.dropdown.icon
+            .ui.special.popup
+                .ui.list
+                    each item in treasure.extra.magicItems
+                        .item #{item}

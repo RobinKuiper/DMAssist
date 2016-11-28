@@ -1,0 +1,89 @@
+#encounterSidebar.ui.right.very.wide.sidebar
+    #close.ui.red.ribbon.icon.label
+        i.close.icon
+        | Encounters
+
+    .ui.basic.segment
+        if currentUser
+            .ui.horizontal.list
+                .item
+                    #encounterSelect.ui.loading.selection.dropdown(data-content='Select encounter.')
+                        i.dropdown.icon
+                        .text Select Encounter
+                        .menu
+                            each encounter in encounters
+                                .item(data-value=encounter.slug) #{encounter.name}
+                .item
+                    .ui.green.icon.add.encounter.button(data-content='Create new encounter.')
+                        i.plus.icon
+                        | Add Encounter
+                //if activeEncounter
+                    .ui.add.to.turnorder.dropdown.button Add to turn order
+                        i.dropdown.icon
+                        .menu
+                            .header.item Select campaign
+                            each campaign in campaigns
+                                .item(data-value=campaign.slug) #{campaign.name}
+
+            if activeEncounter
+                .ui.divider
+
+                //.ui.horizontal.divided.basic.segment.list
+                    .item Monsters: #{activeEncounter.totalMonsters}
+                    .item Total XP: #{activeEncounter.totalXp}
+                    .item Adjusted XP: #{activeEncounter.adjustedXp}
+
+                table.ui.table
+                    thead
+                        tr
+                            th CR
+                            th Name
+                            th HP
+                            th AC
+                            th Exp
+                            th
+                    tbody
+                        if activeEncounter.monsters
+                            each monster in activeEncounter.monsters
+                                +encounterMonsterItem(monster=monster encounterSlug=activeEncounter.slug)
+                        else
+                            tr
+                                td(colspan='6') No monsters added (yet).
+
+                #generateTreasure.ui.button
+                    if activeEncounter.treasure
+                        i.undo.icon
+                    else
+                        i.diamond.icon
+                    | Generate Treasure
+
+                .ui.statistics
+                    if activeEncounter.treasure.pp
+                        .statistic
+                            .value #{activeEncounter.treasure.pp}
+                            .label Platinum
+                    if activeEncounter.treasure.gp
+                        .statistic
+                            .value #{activeEncounter.treasure.gp}
+                            .label Gold
+                    if activeEncounter.treasure.ep
+                        .statistic
+                            .value #{activeEncounter.treasure.ep}
+                            .label Electrum
+                    if activeEncounter.treasure.sp
+                        .statistic
+                            .value #{activeEncounter.treasure.sp}
+                            .label Silver
+                    if activeEncounter.treasure.cp
+                        .statistic
+                            .value #{activeEncounter.treasure.cp}
+                            .label Copper
+
+                .ui.divider
+
+                .ui.fluid.red.remove.encounter.icon.button(data-content='Remove this encounter.')
+                    i.remove.icon
+                    | Remove Encounter
+        else
+            p Please login to create encounters.
+            +loginButtons

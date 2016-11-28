@@ -1,0 +1,23 @@
+h4.ui.dividing.header Generate Treasure
++DAtreasure(inline=true)
+
+h4.ui.dividing.header Treasures
+table.ui.table
+    thead
+        tr
+            th Name
+            th cp
+            th sp
+            th ep
+            th gp
+            th pp
+            th Gems
+            th Art
+            th Magic Items
+    tbody
+        if treasures
+            each treasure in treasures
+                +campaignTreasureItem(treasure=treasure)
+        else
+            tr
+                td(colspan='10') No treasures found.

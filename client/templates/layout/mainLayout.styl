@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300|Roboto')
+
+h1.ui.header, h3.ui.header
+    color #808080
+    a
+        color #000000
+    a:hover
+        color #a9a9a9
+
+body#body
+    font-family "Roboto", Arial, Sans-serif
+    background-color #D2D6D7
+    //overflow hidden
+
+    #mainPusher
+        width calc(100% - 150px)
+
+        padding 20px 20px 20px 35px
+
+        background-color #D2D6D7
+        -webkit-box-shadow: inset 13px 0 27px -13px rgba(0,0,0,1);
+        -moz-box-shadow: inset 13px 0 27px -13px rgba(0,0,0,1);
+        box-shadow: inset 13px 0 27px -13px rgba(0,0,0,1);
+
+        .panel.header
+            background-image url('/images/ui/panel-header.png')
+
+        .panel
+            -webkit-box-shadow 0 1px 2px 0 rgba(0,0,0,0.3)
+            -moz-box-shadow 0 1px 2px 0 rgba(0,0,0,0.3)
+            box-shadow 0 1px 2px 0 rgba(0,0,0,0.3)
+
+#monsterPusher
+    padding 10px
+#monsterList
+    overflow visible !important
+#filterSidebar
+    overflow visible !important
+
+.segment
+    overflow visible !important
+.loading.segment
+    min-height 100px
+
+#encounterSidebar
+    background #ffffff
+
+.ui.action.input .ui.dropdown:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.ui.action.input .ui.dropdown:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}

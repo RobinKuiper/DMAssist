@@ -1,0 +1,55 @@
+.ui.grid
+    .sixteen.wide.column
+        .ui.accordion
+            .ui.center.aligned.top.attached.inverted.panel.active.header Campaign: #{campaign.name}
+            .ui.middle.attached.panel.loading.campaign.active.content.segment
+                .ui.top.attached.tabular.menu
+                    a.active.item(data-tab='turnorder') Turn Order
+                    a.item(data-tab='treasures') Treasures
+                    a.item(data-tab='notes') Notes
+                .ui.bottom.attached.active.tab.segment(data-tab='turnorder')
+                    +turnOrder(campaign=campaign)
+                .ui.bottom.attached.tab.segment(data-tab='treasures')
+                    +campaignTreasures(treasures=campaign.treasures)
+                .ui.bottom.attached.tab.segment(data-tab='notes')
+
+            .ui.panel.loading.campaign.segment
+                .ui.grid
+                    .six.wide.column
+                        .ui.left.floated.massive.blue.buttons
+                            #resetTimeButton.ui.icon.button(data-content='Reset time.')
+                                i.undo.icon
+                            #addTimeButton.ui.button(data-content='Keep track of time elapsed. Click to add time.')=formatTime(campaign.time)
+
+                        //.ui.massive.right.labeled.blue.icon.button(data-content='Keep track of time elapsed.')
+                            =formatTime(campaign.time)
+                            i#resetTime.undo.icon(data-content='Reset time.')
+
+                        .ui.left.floated.mini.basic.vertical.blue.buttons
+                            #shortRestButton.ui.button(data-content='Add short rest time to campaign time.')
+                                i.plus.icon
+                                | Short Rest
+                            #longRestButton.ui.button(data-content='Add long rest time to campaign time.')
+                                i.plus.icon
+                                | Long Rest
+                            //#addTimeButton.ui.dropdown.button(data-content='Add time to campaign time.')
+                                i.plus.icon
+                                | Time
+                    .ten.wide.right.aligned.column
+                        a#publicLink Public Link
+                        .ui.left.aligned.special.flowing.popup
+                            .ui.left.aligned.basic.segment
+                                p Share campaign data with your group.
+                                .ui.fluid.action.input
+                                    input#publicLinkInput(type='text' value='http://dmtools.rgjkuiper.nl/campaigns/#{campaign.slug}/#{campaign.public.code}')
+                                    #copyPublicLink.ui.purple.icon.button(data-content='Copy Link' data-clipboard-target="#publicLinkInput")
+                                        i.copy.icon
+                                .ui.list
+                                    .item
+                                        .ui.toggle.checkbox
+                                            input#showHPCheck(type='checkbox' checked=campaign.public.settings.showHP)
+                                            label Show HP
+                                    .item
+                                        .ui.toggle.checkbox
+                                            input#showACCheck(type='checkbox' checked=campaign.public.settings.showAC)
+                                            label Show AC

@@ -1,0 +1,156 @@
+#encounterSidebarButton.ui.black.left.attached.fixed.icon.button
+    i.sidebar.icon
+    span.text Encounters
+
+if SRDMonsterMessage
+    .ui.icon.info.message
+        i.close.icon
+        i.info.icon
+        .content
+            .header Why were some monsters removed?
+            p I have decided to remove all none SRD (System Reference Document) monsters from this tool. This is to prevent getting into copyright trouble with Wizards of the Coast.
+            p I have also made custom monsters private. You can set your monster to public in the monster editor, but all public monsters will be moderated before showing up publicly. This way you can make every monster from every source without putting this tool at risk.
+            p Thank you for your understanding.
+
+.ui.grid
+    .sixteen.wide.column
+        .ui.center.aligned.top.attached.inverted.panel.header Monsters
+            #toggleMonsterSidebar.ui.left.floated.black.icon.button(data-content='Show filters')
+                i.filter.icon
+        #monsterOverview.ui.middle.attached.panel.loading.segment
+            #filterSidebar.ui.thin.vertical.sidebar.menu
+                .header.item Filters
+                #filterSize.ui.dropdown.item
+                    i.dropdown.icon
+                    .text Size
+                    .menu
+                        .item All
+                        .item Tiny
+                        .item Small
+                        .item Medium
+                        .item Large
+                        .item Huge
+                        .item Gargantuan
+                #filterType.ui.dropdown.item
+                    i.dropdown.icon
+                    .text Type
+                    .menu
+                        .item All
+                        .item(data-value='aberration') Aberration
+                        .item(data-value='beast') Beast
+                        .item(data-value='celestial') Celestial
+                        .item(data-value='construct') Construct
+                        .item(data-value='dragon') Dragon
+                        .item(data-value='elemental') Elemental
+                        .item(data-value='fey') Fey
+                        .item(data-value='fiend') Fiend
+                        .item(data-value='giant') Giant
+                        .item(data-value='humanoid') Humanoid
+                        .item(data-value='monstrosity') Monstrosity
+                        .item(data-value='ooze') Ooze
+                        .item(data-value='plant') Plant
+                        .item(data-value='undead') Undead
+                .ui.dropdown.item
+                    i.dropdown.icon
+                    | Challenge Rating
+                    .menu
+                        #filterMinCR.ui.dropdown.item
+                            i.dropdown.icon
+                            .text Min.
+                            .menu
+                                //TODO: Change to AC: 0-1, 2-6, 7-10, etc
+                                .item(data-value='0') Min.
+                                .item(data-value='0.125') 1/8
+                                .item(data-value='0.25') 1/4
+                                .item(data-value='0.5') 1/2
+                                each cr
+                                    .item(data-value=this) #{this}
+                        #filterMaxCR.ui.dropdown.item
+                            i.dropdown.icon
+                            .text Max.
+                            .menu
+                                .item(data-value='31') Max.
+                                .item(data-value='0.125') 1/8
+                                .item(data-value='0.25') 1/4
+                                .item(data-value='0.5') 1/2
+                                each cr
+                                    .item(data-value=this) #{this}
+                .ui.dropdown.item
+                    i.dropdown.icon
+                    | Armor Class
+                    .menu
+                        #filterMinAC.ui.dropdown.item
+                            i.dropdown.icon
+                            .text Min.
+                            .menu
+                                .item(data-value='0') Min.
+                                each ac
+                                    .item(data-value=this) #{this}
+                        #filterMaxAC.ui.dropdown.item
+                            i.dropdown.icon
+                            .text Max.
+                            .menu
+                                .item(data-value='31') Max.
+                                each ac
+                                    .item(data-value=this) #{this}
+
+            #monsterPusher.pusher
+                .ui.grid
+                    .six.wide.column
+                        +Paginator_UI(monsters)
+                    .four.wide.column
+                        .ui.fluid.icon.input
+                            input#searchInput(type='text' placeholder='Search...' value=search)
+                            i.search.icon
+                    .four.wide.center.aligned.column
+                        unless mine
+                            #customCheckbox.ui.toggle.checkbox(style='margin-top: 8px')
+                                label Show custom
+                                input(type='checkbox' name='custom')
+                    .two.wide.right.aligned.column
+                        select#selectItemsPerPage.ui.compact.dropdown.button.selection
+                            option 10
+                            option 25
+                            option 50
+                            option 100
+
+                table.ui.sortable.purple.unstackable.table
+                    thead
+                        tr
+                            th.two.wide(data-key='challenge_rating') CR
+                            th.four.wide(data-key='name').sorted.ascending Name
+                            th.two.wide(data-key='hit_points') HP
+                            th.two.wide(data-key='armor_class') AC
+                            th.two.wide(data-key='challenge_rating') Exp
+                            th.two.wide
+                    tbody
+                        if mine
+                            if currentUser
+                                if monsterCount
+                                    each monsters
+                                        +monsterItem
+                                else
+                                    tr
+                                        td.center.aligned(colspan='9')
+                                            h1.ui.header No monsters found,
+                                                a(href='/monsters/add' title='Create Monster') create one
+                                                    | now!
+
+                            else
+                                tr
+                                    td.center.aligned(colspan='9')
+                                        p Please sign in to see your monsters.
+                                        +loginButtons
+                        else
+                            each monsters
+                                +monsterItem
+
+                .ui.grid
+                    .six.wide.column
+                        +Paginator_UI(monsters)
+
+                    .ten.wide.right.aligned.column
+                        .ui.label Total Monsters: #{monsterCount}
+
+    //.four.wide.column
+        +encounterColumn

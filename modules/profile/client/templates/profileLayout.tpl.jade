@@ -1,0 +1,19 @@
+.ui.grid
+    .sixteen.wide.column
+        .ui.center.aligned.top.attached.inverted.panel.header Profile
+        .ui.middle.attached.panel.segment
+            .ui.two.column.grid
+                .four.wide.column
+                    .ui.styled.vertical.menu
+                        a.item(href='/profile') User Info
+                            i.user.icon
+                        a.item(href='/profile/avatar') Avatar
+                            i.file.image.outline.icon
+                        //a.item(href='/profile/password') Password
+                            i.lock.icon
+                        a#removeAccount.item
+                            i.remove.icon
+                            | Remove Account
+
+                .twelve.wide.column
+                    +Template.dynamic(template=area)

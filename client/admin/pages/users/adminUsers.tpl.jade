@@ -1,0 +1,25 @@
+h1.ui.divided.header Users
+
+.ui.column.grid
+    .three.wide.column
+        +Paginator_UI(users)
+    .two.wide.column
+        .ui.search.icon.input
+            input#search(type='text' placeholder='Search...')
+            i.search.icon
+table.ui.fluid.sortable.table
+    thead
+        tr
+            th
+            th(data-key='profile.name').sorted.ascending Display Name
+            th(data-key='profile.firstName') First Name
+            th(data-key='profile.lastName') Last Name
+            th(data-key='profile.email') Email
+            th(data-key='status.lastLogin.date') Last Login
+            th(data-key='createdAt') Created At
+            th Admin
+            th
+    tbody
+        each users
+            +adminUserItem
++Paginator_UI(users)
